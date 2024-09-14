@@ -1,6 +1,6 @@
 import sys,os,subprocess,shutil,getopt as opt
 
-scriptRemotePath='http://10.2.12.108/usvn/svn/Three-TD/trunk/client/JenkinsScripts'
+scriptRemotePath='http://10.1.12.7/usvn/svn/Three-TD/trunk/client/JenkinsScripts'
 
 def main():
     global projectPath
