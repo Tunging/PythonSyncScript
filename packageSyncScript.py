@@ -32,7 +32,7 @@ def CopyDirToProject(_scriptPath):
             continue
         path = f'{_scriptPath}/{py}'
         print("Path:"+path)
-        if not os.path.exists(path):
+        if not os.path.isdir(path):
             continue
         files =  os.listdir(path)
         for file in files:
