@@ -54,7 +54,7 @@ def CopyFileOrFolder(src,dst):
 def ShellCommend(cmd):
     print("ShellCommend : " + cmd)
 
-    process = subprocess.Popen(cmd, shell = True)
+    process = subprocess.Popen(cmd + " --username=dongzhiwei --password=dongzhiwei@2021", shell = True)
     process.wait()
     output = process.communicate()
     print(output)
