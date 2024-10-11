@@ -1,13 +1,13 @@
 import sys,os,subprocess,shutil,getopt as opt
 
-scriptRemotePath='http://10.1.12.7/usvn/svn/Three-TD/trunk/client/JenkinsScripts'
+scriptRemotePath='http://10.1.12.7/usvn/svn/Three-TD/trunk/client/JenkinsScripts/PythonBuildScript'
 
 def main():
     global projectPath
     global scriptPath
 
     projectPath = os.getcwd()
-    scriptPath = f'{projectPath}/../../JenkinsScripts'
+    scriptPath = f'{projectPath}/PythonScript'
 
 
     # 更新脚本目录 
@@ -26,23 +26,18 @@ def UpdateDir(_scriptPath):
 
 
 def CopyDirToProject(_scriptPath):
-    pys = os.listdir(_scriptPath)
-    for py in pys:
-        if str.endswith(py,'svn'):
+    files =  os.listdir(_scriptPath)
+    for file in files:
+        if str.endswith(file,'.svn'):
             continue
-        path = f'{_scriptPath}/{py}'
-        print("Path:"+path)
-        if not os.path.isdir(path):
-            continue
-        files =  os.listdir(path)
-        for file in files:
-            dst = rf'{projectPath}/{file}'
-            src = f'{_scriptPath}/{py}/{file}'
-            CopyFileOrFolder(src,dst)
-        pass
+        dst = rf'{projectPath}/{file}'
+        src = f'{_scriptPath}/{file}'
+        CopyFileOrFolder(src,dst)
     pass
 
 def CopyFileOrFolder(src,dst):
+
+    print(f"copy:{src} to {dst}")
     if os.path.isfile(src):
         if(os.path.exists(dst)):
             os.remove(dst)
@@ -54,7 +49,7 @@ def CopyFileOrFolder(src,dst):
 def ShellCommend(cmd):
     print("ShellCommend : " + cmd)
 
-    process = subprocess.Popen(cmd + " --username=dongzhiwei --password=dongzhiwei@2021", shell = True)
+    process = subprocess.Popen(cmd, shell = True)
     process.wait()
     output = process.communicate()
     print(output)
